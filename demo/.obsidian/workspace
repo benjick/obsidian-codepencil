@@ -7,8 +7,12 @@
         "id": "51ad4b062ac31046",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "Codepencil demo.md",
+            "mode": "source",
+            "source": false
+          }
         }
       }
     ],
@@ -73,6 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Codepencil demo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,6 +94,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Codepencil demo.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -110,16 +116,23 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Codepencil demo.md"
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 462.5,
     "collapsed": true
   },
   "active": "51ad4b062ac31046",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "Codepencil demo.md",
+    "Codepencil demo 1.md",
+    "Not codepencil.md"
+  ]
 }
