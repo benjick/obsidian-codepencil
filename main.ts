@@ -3,8 +3,19 @@ import { parseCode, parseMarkdown } from "src/parseMarkdown";
 import { BASIC_VIEW_TYPE, BasicView } from "src/basicView";
 import { CodepencilSettings, DEFAULT_SETTINGS, SettingTab } from "src/settings";
 
+function debounce(func: Function, timeout = 300) {
+	let timer: NodeJS.Timer;
+	return (...args: any[]) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => {
+			func.apply(this, args);
+		}, timeout);
+	};
+}
+
 export default class Codepencil extends Plugin {
 	settings: CodepencilSettings;
+	file: string;
 
 	async activateBasicView(view: MarkdownView) {
 		this.app.workspace.detachLeavesOfType(BASIC_VIEW_TYPE);
@@ -15,8 +26,25 @@ export default class Codepencil extends Plugin {
 		this.app.workspace.createLeafBySplit(leaf).setViewState({
 			type: BASIC_VIEW_TYPE,
 			active: false,
-			state: { code, filename: "foo" },
+			state: { code },
 		});
+	}
+
+	async updateBasicView(view: MarkdownView) {
+		if (this.file === view.file.name) {
+			this.app.workspace
+				.getLeavesOfType(BASIC_VIEW_TYPE)
+				.forEach((leaf) => {
+					if (leaf.view instanceof BasicView) {
+						const root = parseMarkdown(view.data);
+						const code = parseCode(root.children);
+						leaf.setViewState({
+							type: BASIC_VIEW_TYPE,
+							state: { code },
+						});
+					}
+				});
+		}
 	}
 
 	async onload() {
@@ -27,11 +55,24 @@ export default class Codepencil extends Plugin {
 			id: "open-codepencil",
 			name: "Open codepencil view",
 			editorCallback: (editor: Editor, view: MarkdownView) => {
+				this.file = view.file.name;
 				this.activateBasicView(view);
 			},
 		});
 
+		const debouncedUpdateBasicView = debounce((view: MarkdownView) =>
+			this.updateBasicView(view)
+		);
+
+		this.registerEvent(
+			this.app.workspace.on("editor-change", (editor, view) => {
+				debouncedUpdateBasicView(view);
+			})
+		);
+
 		this.addSettingTab(new SettingTab(this.app, this));
+
+		console.log("📝 Loaded codepencil");
 	}
 
 	onunload() {

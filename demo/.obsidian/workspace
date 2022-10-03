@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "51ad4b062ac31046",
+        "id": "9e1c34654c28b024",
         "type": "leaf",
         "state": {
           "type": "markdown",
@@ -129,10 +129,10 @@
     "width": 462.5,
     "collapsed": true
   },
-  "active": "51ad4b062ac31046",
+  "active": "9e1c34654c28b024",
   "lastOpenFiles": [
     "Codepencil demo.md",
-    "Codepencil demo 1.md",
-    "Not codepencil.md"
+    "Not codepencil.md",
+    "Codepencil demo 2.md"
   ]
 }

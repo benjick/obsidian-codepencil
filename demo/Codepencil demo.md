@@ -5,7 +5,8 @@ foo: bar
 # Codepencil demo
 ```html
 <div class="foo">
-	<h2>Title</h2>
+	<h2>This is a title</h2>
+	<button id="button">Alert</button>
 </div>
 ```
 
@@ -17,9 +18,11 @@ foo: bar
 ```
 
 ```html
-<p>okay 2</p>
+<p>Testing testing...</p>
 ```
 
 ```js
-console.log('zoom')
+document.querySelector('#button').addEventListener('click', () => {
+	alert("bar");
+})
 ```

@@ -8,10 +8,11 @@ export interface BasicViewState {
 		css: string;
 		js: string;
 	};
-	filename: string;
 }
 
 export class BasicView extends ItemView {
+	navigation = true;
+
 	constructor(leaf: WorkspaceLeaf) {
 		super(leaf);
 	}
@@ -47,7 +48,11 @@ export class BasicView extends ItemView {
 		return "checkmark";
 	}
 
-	async onOpen() {}
+	async onOpen() {
+		console.log("Opened basic view");
+	}
 
-	async onClose() {}
+	async onClose() {
+		console.log("Closed basic view");
+	}
 }
