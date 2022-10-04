@@ -1,7 +1,3 @@
----
-codepencil: basic
-foo: bar
----
 # Codepencil demo
 ```html
 <div class="foo">
@@ -18,7 +14,7 @@ foo: bar
 ```
 
 ```html
-<p>Testing testing...</p>
+<p>Some more HTML</p>
 ```
 
 ```js

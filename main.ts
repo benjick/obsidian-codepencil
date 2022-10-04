@@ -23,11 +23,13 @@ export default class Codepencil extends Plugin {
 		const root = parseMarkdown(data);
 		const code = parseCode(root.children);
 
-		this.app.workspace.createLeafBySplit(leaf).setViewState({
-			type: BASIC_VIEW_TYPE,
-			active: false,
-			state: { code },
-		});
+		this.app.workspace
+			.createLeafBySplit(leaf, this.settings.split)
+			.setViewState({
+				type: BASIC_VIEW_TYPE,
+				active: false,
+				state: { code },
+			});
 	}
 
 	async updateBasicView(view: MarkdownView) {

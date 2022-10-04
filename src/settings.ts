@@ -1,12 +1,12 @@
 import Codepencil from "main";
-import { PluginSettingTab, App, Setting } from "obsidian";
+import { PluginSettingTab, App, Setting, SplitDirection } from "obsidian";
 
 export interface CodepencilSettings {
-	mySetting: string;
+	split: SplitDirection;
 }
 
 export const DEFAULT_SETTINGS: CodepencilSettings = {
-	mySetting: "default",
+	split: "vertical",
 };
 
 export class SettingTab extends PluginSettingTab {
@@ -20,18 +20,20 @@ export class SettingTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
-		containerEl.createEl("h2", { text: "Settings for my awesome plugin." });
+		containerEl.createEl("h2", { text: "Codepencil settings" });
 
 		new Setting(containerEl)
-			.setName("Setting #1")
-			.setDesc("It's a secret")
-			.addText((text) =>
-				text
-					.setPlaceholder("Enter your secret")
-					.setValue(this.plugin.settings.mySetting)
-					.onChange(async (value) => {
-						console.log("Secret: " + value);
-						this.plugin.settings.mySetting = value;
+			.setName("Panel split direction")
+			.setDesc("Which direction to split the new panel into")
+			.addDropdown((dropdown) =>
+				dropdown
+					.addOptions({
+						vertical: "Vertically",
+						horizontal: "Horizontally",
+					})
+					.setValue(this.plugin.settings.split)
+					.onChange(async (value: SplitDirection) => {
+						this.plugin.settings.split = value;
 						await this.plugin.saveSettings();
 					})
 			);
